@@ -13,7 +13,8 @@ namespace FileSystemViewer.Application.Composite
         private string name;
         private string path;
         private bool thisDisk;
-        private int y;// 
+        private int y;
+        static private int coordinateCurrentDyrectory = -1;
 
         public int Coordinate
         {
@@ -21,10 +22,22 @@ namespace FileSystemViewer.Application.Composite
             set { y = value; }
         }
 
+        public int CoordinateCurrentDyrectory
+        {
+            get { return coordinateCurrentDyrectory; }
+        }
+
         public bool Current
         {
             get { return current; }
-            set { current = value; }
+            set
+            {
+                if (value)
+                {
+                    coordinateCurrentDyrectory = this.Coordinate;
+                }
+                current = value;
+            }
         }
 
         public bool Head

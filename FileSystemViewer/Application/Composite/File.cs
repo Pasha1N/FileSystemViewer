@@ -15,7 +15,7 @@ namespace FileSystemViewer.Application.Composite
         public override void Coordinator()
         {
             Coordinate = Counter.Count;
-            Counter.Count++;
+           // Counter.Count++;
         }
 
         public override void ShowName()
@@ -27,9 +27,13 @@ namespace FileSystemViewer.Application.Composite
                 Console.BackgroundColor = ConsoleColor.White;
             }
 
+           // Console.Write(Name);
             Console.Write(Name);
             ShowLength();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine(Coordinate);
             Console.ResetColor();
+            //Console.ResetColor();
         }
 
         override public void Show()
@@ -53,19 +57,19 @@ namespace FileSystemViewer.Application.Composite
 
             if (count == 0)
             {
-                Console.WriteLine(" ( " + b + "B ) ");
+                Console.Write(" ( " + b + "B ) ");
             }
             else if (count == 1)
             {
-                Console.WriteLine(" ( " + Math.Round(b, 2) + "Kb ) ");
+                Console.Write(" ( " + Math.Round(b, 2) + "Kb ) ");
             }
             else if (count == 2)
             {
-                Console.WriteLine(" ( " + Math.Round(b, 2) + "Mb )");
+                Console.Write(" ( " + Math.Round(b, 2) + "Mb )");
             }
             else if (count == 3)
             {
-                Console.WriteLine(" ( " + Math.Round(b, 2) + "Gb )");
+                Console.Write(" ( " + Math.Round(b, 2) + "Gb )");
             }
         }
     }

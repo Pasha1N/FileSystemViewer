@@ -38,11 +38,11 @@ namespace FileSystemViewer.Application
                 Folder folder = new Folder(paths[i]);
                 folder.IndentationsLength = indentationsLength;
                 folder.ThisDisk = true;
-                folder.Coordinate = i;
-                //Counter.Count = i;
                 folders.Add(folder);
                 myComputer.AddChildren(folder);
             }
+
+            myComputer.Coordinator();
             folders[0].Current = true;
         }
 

@@ -54,13 +54,31 @@ namespace FileSystemViewer.Application.Composite
         override public void Show()
         {
             int windowHeight = Console.WindowHeight;
-            ShowName();
+            int minimumCoordinate = 0;
+           // if (minimumCoordinate == 0 && this.Head)
+          //  {
+                ShowName();
+          //  }
 
             for (int i = 0; i < Children.Count; i++)
             {
-                int y = Console.CursorTop;
-                if (y < (windowHeight - 1))
+               
+
+                if (Children[i].Coordinate >= minimumCoordinate && Children[i].Coordinate < windowHeight) 
                 {
+
+                    if (CoordinateCurrentDyrectory > windowHeight-1)
+                    {
+                        windowHeight++;
+                        minimumCoordinate++;
+                    }
+                    
+                    if(CoordinateCurrentDyrectory<minimumCoordinate)
+                    {
+                        windowHeight--;
+                        minimumCoordinate--;
+                    }
+
                     int @switch = 0;
                     for (int j = 0; j < Children[i].IndentationsLength; j++)
                     {

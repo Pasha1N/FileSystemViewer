@@ -20,9 +20,10 @@ namespace FileSystemViewer.Application.Command
         {
             if (key.Key == ConsoleKey.LeftArrow)
             {
-                Counter.Count -= mainFolder.Childrens.Count;
                 mainFolder.Childrens.Clear();
                 toWork.Working = false;
+                Counter.DefaultValue();
+                myComputer.Coordinator();
             }
         }
     }

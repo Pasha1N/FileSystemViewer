@@ -30,8 +30,8 @@ namespace FileSystemViewer.Application.Command
             if (key.Key == ConsoleKey.RightArrow)
             {
                 Initialisation();
-                Counter.Count = mainFolder.Coordinate;
-                mainFolder.Coordinator();
+                Counter.DefaultValue();
+                myComputer.Coordinator();
                 Management();
             }
         }
@@ -44,26 +44,37 @@ namespace FileSystemViewer.Application.Command
             while (toWork.Working)
             {
                 ConsoleKeyInfo key;
+                if (folders.Count > 0)
+                {
+                    Down downArrow = new Down(fileSystemEntriesPaths, folders, current);
+                    Up upArrow = new Up(fileSystemEntriesPaths, folders, current);
+                    Right rightArrow = new Right(folders[current.Index] as Folder, indentationLength + 2, myComputer);
 
-                Down downArrow = new Down(fileSystemEntriesPaths, folders, current);
-                Up upArrow = new Up(fileSystemEntriesPaths, folders, current);
+                    commands.Add(downArrow);
+                    commands.Add(upArrow);
+                    commands.Add(rightArrow);
+                }
+
                 Left leftArrow = new Left(mainFolder, myComputer, toWork);
-                Right rightArrow = new Right(folders[current.Index] as Folder, indentationLength + 2, myComputer);
-
-                commands.Add(downArrow);
-                commands.Add(upArrow);
-                commands.Add(rightArrow);
                 commands.Add(leftArrow);
 
                 key = Console.ReadKey();
-                folders[current.Index].Current = false;
+
+                if (folders.Count > 0)
+                {
+                    folders[current.Index].Current = false;
+                }
 
                 foreach (ICommand command in commands)
                 {
                     command.Executive(key);
                 }
 
-                folders[current.Index].Current = true;
+                if (folders.Count > 0)
+                {
+                    folders[current.Index].Current = true;
+                }
+
                 ShowComposite.show(myComputer);
                 commands.Clear();
             }
@@ -73,29 +84,28 @@ namespace FileSystemViewer.Application.Command
         {
             currentDirectory = new DirectoryInfo(mainFolder.Way);
 
-            if (currentDirectory.GetDirectories().Length > 0)
+            try
             {
                 directories = currentDirectory.GetDirectories();
-            }
-
-            if (currentDirectory.GetFiles().Length > 0)
-            {
                 files = currentDirectory.GetFiles();
+
+                string[] directoryNames = Directory.GetDirectories(mainFolder.Way);
+                string[] fileNames = Directory.GetFiles(mainFolder.Way);
+                List<string> filePaths = new List<string>();
+                List<string> directoryPaths = new List<string>();
+
+                filePaths.AddRange(fileNames);
+                directoryPaths.AddRange(directoryNames);
+
+                filePaths.Sort();
+                directoryPaths.Sort();
+
+                fileSystemEntriesPaths.AddRange(directoryPaths);
+                fileSystemEntriesPaths.AddRange(filePaths);
             }
-
-            string[] directoryNames = Directory.GetDirectories(mainFolder.Way);
-            string[] fileNames = Directory.GetFiles(mainFolder.Way);
-            List<string> filePaths = new List<string>();
-            List<string> directoryPaths = new List<string>();
-
-            filePaths.AddRange(fileNames);
-            directoryPaths.AddRange(directoryNames);
-
-            filePaths.Sort();
-            directoryPaths.Sort();
-
-            fileSystemEntriesPaths.AddRange(directoryPaths);
-            fileSystemEntriesPaths.AddRange(filePaths);
+            catch (UnauthorizedAccessException exception)
+            {
+            }
 
             foreach (string path in fileSystemEntriesPaths)
             {
@@ -103,8 +113,6 @@ namespace FileSystemViewer.Application.Command
                 {
                     Folder folder = new Folder(path);
                     folder.IndentationsLength = indentationLength + 2;
-                 //   Counter.Count++;
-                   // folder.Coordinate = Counter.Count;
                     folders.Add(folder);
                     mainFolder.AddChildren(folder);
                 }
@@ -112,16 +120,20 @@ namespace FileSystemViewer.Application.Command
                 {
                     _File file = new _File(path);
                     file.IndentationsLength = indentationLength;
-                  //  Counter.Count++;
-                    //file.Coordinate = Counter.Count;
                     folders.Add(file);
                     mainFolder.AddChildren(file);
                 }
             }
 
-            if (currentDirectory.GetDirectories().Length > 0)
+            try
             {
-                folders[current.Index].Current = true;
+                if (currentDirectory.GetDirectories().Length > 0)
+                {
+                    folders[current.Index].Current = true;
+                }
+            }
+            catch (UnauthorizedAccessException exception)
+            {
             }
         }
     }

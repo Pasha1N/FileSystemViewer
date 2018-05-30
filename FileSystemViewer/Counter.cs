@@ -9,5 +9,10 @@
             get { return count; }
             set { count = value; }
         }
+
+        static public void DefaultValue()
+        {
+            count = 1;
+        }
     }
 }
