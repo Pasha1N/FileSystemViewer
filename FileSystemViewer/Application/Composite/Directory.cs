@@ -25,6 +25,7 @@ namespace FileSystemViewer.Application.Composite
         public int CoordinateCurrentDyrectory
         {
             get { return coordinateCurrentDyrectory; }
+            set { coordinateCurrentDyrectory = value; }
         }
 
         public bool Current

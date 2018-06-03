@@ -32,11 +32,11 @@ namespace FileSystemViewer.Application.Composite
 
         public override void ShowName()
         {
-            Console.ForegroundColor = ThisDisk ? ConsoleColor.Green : Console.ForegroundColor = ConsoleColor.Yellow; 
+            Console.ForegroundColor = ThisDisk ? ConsoleColor.Green : Console.ForegroundColor = ConsoleColor.Yellow;
 
             if (Current)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGray; 
+                Console.BackgroundColor = ConsoleColor.DarkGray;
             }
 
             if (Head)
@@ -47,36 +47,43 @@ namespace FileSystemViewer.Application.Composite
             // Console.WriteLine(Name);
             Console.Write(Name);
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine(Coordinate); 
+            Console.WriteLine(Coordinate);
             Console.ResetColor();
         }
 
         override public void Show()
         {
-            int windowHeight = Console.WindowHeight;
-            int minimumCoordinate = 0;
-           // if (minimumCoordinate == 0 && this.Head)
-          //  {
-                ShowName();
-          //  }
+            // if (minimumCoordinate == 0 && this.Head)
+            //  {
+            //  ShowName();
+            //  }
 
             for (int i = 0; i < Children.Count; i++)
             {
-               
-
-                if (Children[i].Coordinate >= minimumCoordinate && Children[i].Coordinate < windowHeight) 
+                // if (CoordinateCurrentDyrectory < Console.WindowHeight)
+                // {
+                //   WindowSize.MaximumHeight = Console.WindowHeight;
+                //  }
+                if(Children[i] is Folder)
                 {
+                    // Folder folder = new Folder(Children[i].Way);
+             //       WindowSize.Minimum += 5; 
+                }
 
-                    if (CoordinateCurrentDyrectory > windowHeight-1)
+                WindowSize.Initialization();
+                //if (CoordinateCurrentDyrectory >= WindowSize.Minimum && CoordinateCurrentDyrectory < WindowSize.MaximumHeight)
+                if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
+                {
+                    if (CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)
                     {
-                        windowHeight++;
-                        minimumCoordinate++;
+                        WindowSize.MaximumHeight++;
+                        WindowSize.Minimum++;
                     }
-                    
-                    if(CoordinateCurrentDyrectory<minimumCoordinate)
+
+                    if (CoordinateCurrentDyrectory <= WindowSize.Minimum)
                     {
-                        windowHeight--;
-                        minimumCoordinate--;
+                        WindowSize.MaximumHeight--;
+                        WindowSize.Minimum--;
                     }
 
                     int @switch = 0;
@@ -121,8 +128,10 @@ namespace FileSystemViewer.Application.Composite
                             Console.Write("  ");
                         }
                     }
-                    Children[i].Show();
+
+                    Children[i].ShowName();
                 }
+                Children[i].Show();
             }
         }
 

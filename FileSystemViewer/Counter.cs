@@ -12,7 +12,7 @@
 
         static public void DefaultValue()
         {
-            count = 1;
+            count = 0;
         }
     }
 }

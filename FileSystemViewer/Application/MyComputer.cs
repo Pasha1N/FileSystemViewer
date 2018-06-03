@@ -68,7 +68,6 @@ namespace FileSystemViewer.Application
                 {
                     command.Executive(key);
                 }
-
                 folders[current.Index].Current = true;
                 ShowComposite.show(myComputer);
                 commands.Clear();

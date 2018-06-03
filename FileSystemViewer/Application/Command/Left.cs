@@ -20,6 +20,11 @@ namespace FileSystemViewer.Application.Command
         {
             if (key.Key == ConsoleKey.LeftArrow)
             {
+                // WindowSize.MaximumHeight -= mainFolder.Childrens.Count;
+                //   WindowSize.Minimum -= mainFolder.Childrens.Count;
+                // WindowSize.Minimum -= mainFolder.Childrens.Count- mainFolder.CoordinateCurrentDyrectory ;
+               // WindowSize.Minimum -= WindowSize.MaximumHeight - Console.WindowHeight;
+
                 mainFolder.Childrens.Clear();
                 toWork.Working = false;
                 Counter.DefaultValue();

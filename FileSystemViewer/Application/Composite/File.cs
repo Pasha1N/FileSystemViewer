@@ -38,7 +38,7 @@ namespace FileSystemViewer.Application.Composite
 
         override public void Show()
         {
-            ShowName();
+           // ShowName();
         }
 
         public void ShowLength()
