@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace FileSystemViewer.Application.Composite
+﻿namespace FileSystemViewer.Application.Composite
 {
     internal abstract class _Directory
     {

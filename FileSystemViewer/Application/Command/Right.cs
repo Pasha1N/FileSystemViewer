@@ -16,10 +16,9 @@ namespace FileSystemViewer.Application.Command
         private FileInfo[] files;
         private IList<_Directory> folders = new List<_Directory>();
         private Folder mainFolder;
-        private Folder myComputer;
         private int minimumDirectoryHeight = WindowSize.Minimum;
+        private Folder myComputer;
         private int maximumDirectoryHeight = WindowSize.MaximumHeight;
-
 
         public Right(Folder mainFolder, int indentationLength, Folder myComputer)
         {
@@ -42,7 +41,6 @@ namespace FileSystemViewer.Application.Command
         public void Management()
         {
             ShowComposite.show(myComputer);
-
             ToWork toWork = new ToWork(true);
 
             while (toWork.Working)
@@ -59,9 +57,8 @@ namespace FileSystemViewer.Application.Command
                     commands.Add(rightArrow);
                 }
 
-                Left leftArrow = new Left(mainFolder, myComputer, toWork,minimumDirectoryHeight,maximumDirectoryHeight);
+                Left leftArrow = new Left(mainFolder, myComputer, toWork, minimumDirectoryHeight, maximumDirectoryHeight);
                 commands.Add(leftArrow);
-
                 key = Console.ReadKey();
 
                 if (folders.Count > 0)
@@ -80,7 +77,6 @@ namespace FileSystemViewer.Application.Command
                 }
 
                 ShowComposite.show(myComputer);
-
                 commands.Clear();
             }
         }

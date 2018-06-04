@@ -6,12 +6,12 @@ namespace FileSystemViewer.Application.Command
     internal class Left : ICommand
     {
         private Folder mainFolder;
+        private int maximumDirectoryHeight;
+        private int minimumDirectoryHeight;
         private Folder myComputer;
         private ToWork toWork;
-        private int minimumDirectoryHeight;
-        private int maximumDirectoryHeight;
 
-        public Left(Folder mainFolder, Folder myComputer, ToWork toWork,int minimumDirectoryHeight,int maximumDirectoryHeight)
+        public Left(Folder mainFolder, Folder myComputer, ToWork toWork, int minimumDirectoryHeight, int maximumDirectoryHeight)
         {
             this.maximumDirectoryHeight = maximumDirectoryHeight;
             this.minimumDirectoryHeight = minimumDirectoryHeight;

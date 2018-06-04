@@ -44,22 +44,16 @@ namespace FileSystemViewer.Application.Composite
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
 
-            // Console.WriteLine(Name);
-            Console.Write(Name);
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine(Coordinate);
+            Console.WriteLine(Name);
             Console.ResetColor();
         }
 
         override public void Show()
         {
-            // if (minimumCoordinate == 0 && this.Head)
-            //  {
-            //  ShowName();
-            //  }
             for (int i = 0; i < Children.Count; i++)
             {
                 WindowSize.Initialization();
+
                 if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
                 {
                     if (Children[i].CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)

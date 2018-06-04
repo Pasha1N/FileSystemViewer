@@ -2,7 +2,7 @@
 
 namespace FileSystemViewer.Application.Command
 {
-    interface ICommand
+    internal interface ICommand
     {
         void Executive(ConsoleKeyInfo key);
     }

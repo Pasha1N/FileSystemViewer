@@ -1,6 +1,6 @@
 ﻿namespace FileSystemViewer
 {
-    class ToWork
+    internal class ToWork
     {
         private bool toWork;
 

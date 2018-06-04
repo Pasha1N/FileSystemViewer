@@ -47,7 +47,6 @@ namespace FileSystemViewer.Application.Command
                         }
                     }
                 }
-
             }
         }
     }

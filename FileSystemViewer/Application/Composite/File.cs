@@ -15,7 +15,6 @@ namespace FileSystemViewer.Application.Composite
         public override void Coordinator()
         {
             Coordinate = Counter.Count;
-           // Counter.Count++;
         }
 
         public override void ShowName()
@@ -27,18 +26,14 @@ namespace FileSystemViewer.Application.Composite
                 Console.BackgroundColor = ConsoleColor.White;
             }
 
-           // Console.Write(Name);
             Console.Write(Name);
             ShowLength();
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine(Coordinate);
+            Console.WriteLine();
             Console.ResetColor();
-            //Console.ResetColor();
         }
 
         override public void Show()
         {
-           // ShowName();
         }
 
         public void ShowLength()

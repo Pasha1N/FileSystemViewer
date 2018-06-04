@@ -1,18 +1,14 @@
 ﻿using FileSystemViewer.Application.Composite;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileSystemViewer.Application.Command.DiskOperations
 {
-    class DownDisk : ICommand
+    internal class DownDisk : ICommand
     {
         private Current current;
-        private IList<string> paths;
         private IList<_Directory> folders;
+        private IList<string> paths;
 
         public DownDisk(IList<string> paths, IList<_Directory> folders, Current current)
         {
