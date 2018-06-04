@@ -40,8 +40,14 @@ namespace FileSystemViewer.Application.Command
                     if (folder.Way == paths[current.Index])
                     {
                         folder.Current = true;
+
+                        foreach (_Directory folder1 in folders)
+                        {
+                            folder1.CoordinateCurrentDyrectory = folder.Coordinate;
+                        }
                     }
                 }
+
             }
         }
     }

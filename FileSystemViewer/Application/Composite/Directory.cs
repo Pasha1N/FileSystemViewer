@@ -14,7 +14,7 @@ namespace FileSystemViewer.Application.Composite
         private string path;
         private bool thisDisk;
         private int y;
-        static private int coordinateCurrentDyrectory = -1;
+        private int coordinateCurrentDyrectory = -1;
 
         public int Coordinate
         {

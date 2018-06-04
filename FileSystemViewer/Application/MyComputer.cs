@@ -69,6 +69,10 @@ namespace FileSystemViewer.Application
                     command.Executive(key);
                 }
                 folders[current.Index].Current = true;
+
+                WindowSize.Minimum = 0;
+                WindowSize.MaximumHeight = Console.WindowHeight;
+
                 ShowComposite.show(myComputer);
                 commands.Clear();
             }

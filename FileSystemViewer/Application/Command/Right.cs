@@ -17,6 +17,9 @@ namespace FileSystemViewer.Application.Command
         private IList<_Directory> folders = new List<_Directory>();
         private Folder mainFolder;
         private Folder myComputer;
+        private int minimumDirectoryHeight = WindowSize.Minimum;
+        private int maximumDirectoryHeight = WindowSize.MaximumHeight;
+
 
         public Right(Folder mainFolder, int indentationLength, Folder myComputer)
         {
@@ -31,7 +34,7 @@ namespace FileSystemViewer.Application.Command
             {
                 Initialisation();
                 Counter.DefaultValue();
-               myComputer.Coordinator();
+                myComputer.Coordinator();
                 Management();
             }
         }
@@ -56,14 +59,14 @@ namespace FileSystemViewer.Application.Command
                     commands.Add(rightArrow);
                 }
 
-                Left leftArrow = new Left(mainFolder, myComputer, toWork);
+                Left leftArrow = new Left(mainFolder, myComputer, toWork,minimumDirectoryHeight,maximumDirectoryHeight);
                 commands.Add(leftArrow);
 
                 key = Console.ReadKey();
 
                 if (folders.Count > 0)
                 {
-                  folders[current.Index].Current = false;
+                    folders[current.Index].Current = false;
                 }
 
                 foreach (ICommand command in commands)
@@ -73,7 +76,7 @@ namespace FileSystemViewer.Application.Command
 
                 if (folders.Count > 0)
                 {
-                   // folders[current.Index].Current = true;
+                    folders[current.Index].Current = true;
                 }
 
                 ShowComposite.show(myComputer);
@@ -131,11 +134,17 @@ namespace FileSystemViewer.Application.Command
             {
                 if (currentDirectory.GetDirectories().Length > 0)
                 {
-             //      folders[current.Index].Current = true;
+                    folders[current.Index].Current = true;
                 }
             }
             catch (UnauthorizedAccessException exception)
             {
+            }
+
+            foreach (_Directory folder in folders)
+            {
+
+                folder.CoordinateCurrentDyrectory = mainFolder.CoordinateCurrentDyrectory;
             }
         }
     }

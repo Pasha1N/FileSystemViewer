@@ -57,30 +57,18 @@ namespace FileSystemViewer.Application.Composite
             //  {
             //  ShowName();
             //  }
-
             for (int i = 0; i < Children.Count; i++)
             {
-                // if (CoordinateCurrentDyrectory < Console.WindowHeight)
-                // {
-                //   WindowSize.MaximumHeight = Console.WindowHeight;
-                //  }
-                if(Children[i] is Folder)
-                {
-                    // Folder folder = new Folder(Children[i].Way);
-             //       WindowSize.Minimum += 5; 
-                }
-
                 WindowSize.Initialization();
-                //if (CoordinateCurrentDyrectory >= WindowSize.Minimum && CoordinateCurrentDyrectory < WindowSize.MaximumHeight)
                 if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
                 {
-                    if (CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)
+                    if (Children[i].CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)
                     {
                         WindowSize.MaximumHeight++;
                         WindowSize.Minimum++;
                     }
 
-                    if (CoordinateCurrentDyrectory <= WindowSize.Minimum)
+                    if (Children[i].CoordinateCurrentDyrectory <= WindowSize.Minimum)
                     {
                         WindowSize.MaximumHeight--;
                         WindowSize.Minimum--;
