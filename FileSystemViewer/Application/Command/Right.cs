@@ -71,20 +71,14 @@ namespace FileSystemViewer.Application.Command
                 commands.Add(leftArrow);
                 key = Console.ReadKey();
 
-                if (folders.Count > 0)
-                {
-                    folders[current.Index].Current = false;
-                }
+                folders[current.Index].Current = false;
 
                 foreach (ICommand command in commands)
                 {
                     command.Executive(key);
                 }
 
-                if (folders.Count > 0)
-                {
-                    folders[current.Index].Current = true;
-                }
+                folders[current.Index].Current = true;
 
                 ShowComposite.show(myComputer);
                 commands.Clear();
@@ -130,10 +124,7 @@ namespace FileSystemViewer.Application.Command
                 }
             }
 
-            if (currentDirectory.GetDirectories().Length > 0)
-            {
-                folders[current.Index].Current = true;
-            }
+            folders[current.Index].Current = true;
 
             foreach (_Directory folder in folders)
             {
