@@ -50,11 +50,21 @@ namespace FileSystemViewer.Application.Command
                 {
                     Down downArrow = new Down(fileSystemEntriesPaths, folders, current);
                     Up upArrow = new Up(fileSystemEntriesPaths, folders, current);
-                    Right rightArrow = new Right(folders[current.Index] as Folder, indentationLength + 2, myComputer);
+
+                    try
+                    {
+                        if (folders[current.Index] is Folder && Directory.GetFileSystemEntries(folders[current.Index].Way).Length > 0)
+                        {
+                            Right rightArrow = new Right(folders[current.Index] as Folder, indentationLength + 2, myComputer);
+                            commands.Add(rightArrow);
+                        }
+                    }
+                    catch (UnauthorizedAccessException exception)
+                    {
+                    }
 
                     commands.Add(downArrow);
                     commands.Add(upArrow);
-                    commands.Add(rightArrow);
                 }
 
                 Left leftArrow = new Left(mainFolder, myComputer, toWork, minimumDirectoryHeight, maximumDirectoryHeight);
@@ -85,28 +95,22 @@ namespace FileSystemViewer.Application.Command
         {
             currentDirectory = new DirectoryInfo(mainFolder.Way);
 
-            try
-            {
-                directories = currentDirectory.GetDirectories();
-                files = currentDirectory.GetFiles();
+            directories = currentDirectory.GetDirectories();
+            files = currentDirectory.GetFiles();
 
-                string[] directoryNames = Directory.GetDirectories(mainFolder.Way);
-                string[] fileNames = Directory.GetFiles(mainFolder.Way);
-                List<string> filePaths = new List<string>();
-                List<string> directoryPaths = new List<string>();
+            string[] directoryNames = Directory.GetDirectories(mainFolder.Way);
+            string[] fileNames = Directory.GetFiles(mainFolder.Way);
+            List<string> filePaths = new List<string>();
+            List<string> directoryPaths = new List<string>();
 
-                filePaths.AddRange(fileNames);
-                directoryPaths.AddRange(directoryNames);
+            filePaths.AddRange(fileNames);
+            directoryPaths.AddRange(directoryNames);
 
-                filePaths.Sort();
-                directoryPaths.Sort();
+            filePaths.Sort();
+            directoryPaths.Sort();
 
-                fileSystemEntriesPaths.AddRange(directoryPaths);
-                fileSystemEntriesPaths.AddRange(filePaths);
-            }
-            catch (UnauthorizedAccessException exception)
-            {
-            }
+            fileSystemEntriesPaths.AddRange(directoryPaths);
+            fileSystemEntriesPaths.AddRange(filePaths);
 
             foreach (string path in fileSystemEntriesPaths)
             {
@@ -126,20 +130,13 @@ namespace FileSystemViewer.Application.Command
                 }
             }
 
-            try
+            if (currentDirectory.GetDirectories().Length > 0)
             {
-                if (currentDirectory.GetDirectories().Length > 0)
-                {
-                    folders[current.Index].Current = true;
-                }
-            }
-            catch (UnauthorizedAccessException exception)
-            {
+                folders[current.Index].Current = true;
             }
 
             foreach (_Directory folder in folders)
             {
-
                 folder.CoordinateCurrentDyrectory = mainFolder.CoordinateCurrentDyrectory;
             }
         }
