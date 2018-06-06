@@ -88,7 +88,11 @@ namespace FileSystemViewer.Application.Composite
 
                     if (i < Children.Count - 1)
                     {
-                        if (Children[i] is Folder)
+                        if (i < Children.Count - 1 && Children[i] is Folder && Children[i + 1] is _File)
+                        {
+                            Console.Write((char)0x2514);
+                        }
+                        else if (Children[i] is Folder)
                         {
                             Console.Write((char)0x251C);
                         }
@@ -110,7 +114,6 @@ namespace FileSystemViewer.Application.Composite
                             Console.Write("  ");
                         }
                     }
-
                     Children[i].ShowName();
                 }
                 Children[i].Show();
