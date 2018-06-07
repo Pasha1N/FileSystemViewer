@@ -24,8 +24,8 @@ namespace FileSystemViewer.Application.Composite
         {
             foreach (_Directory directory in Children)
             {
-                directory.Coordinate = Counter.Count;
                 Counter.Count++;
+                directory.Coordinate = Counter.Count;
                 directory.Coordinator();
             }
         }
@@ -44,7 +44,11 @@ namespace FileSystemViewer.Application.Composite
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
 
-            Console.WriteLine(Name);
+            //    Console.WriteLine(Name);
+            //   Console.ResetColor();
+            Console.Write(Name);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(Coordinate);
             Console.ResetColor();
         }
 
@@ -53,20 +57,24 @@ namespace FileSystemViewer.Application.Composite
             for (int i = 0; i < Children.Count; i++)
             {
                 WindowSize.Initialization();
-
-                if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
+                if (!Children[i].ThisDisk)
                 {
-                    if (Children[i].CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)
+                    if (Children[i].CoordinateCurrentDyrectory >= WindowSize.MaximumHeight)
                     {
                         WindowSize.MaximumHeight++;
                         WindowSize.Minimum++;
                     }
+
 
                     if (Children[i].CoordinateCurrentDyrectory <= WindowSize.Minimum)
                     {
                         WindowSize.MaximumHeight--;
                         WindowSize.Minimum--;
                     }
+                }
+                if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
+                {
+                  
 
                     int @switch = 0;
                     for (int j = 0; j < Children[i].IndentationsLength; j++)
@@ -74,7 +82,9 @@ namespace FileSystemViewer.Application.Composite
                         if (@switch == 0)
                         {
                             Console.Write(' ');
-                            @switch++;
+                            
+                                @switch++;
+                            
                         }
                         else
                         {
@@ -126,3 +136,72 @@ namespace FileSystemViewer.Application.Composite
         }
     }
 }
+
+ //for (int i = 0; i<Children.Count; i++)
+ //           {
+ //               WindowSize.Initialization();
+
+ //               if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate<WindowSize.MaximumHeight)
+ //               {
+ //                   if (Children[i].CoordinateCurrentDyrectory > WindowSize.MaximumHeight - 1)
+ //                   {
+ //                       WindowSize.MaximumHeight++;
+ //                       WindowSize.Minimum++;
+ //                   }
+
+ //                   if (Children[i].CoordinateCurrentDyrectory <= WindowSize.Minimum)
+ //                   {
+ //                       WindowSize.MaximumHeight--;
+ //                       WindowSize.Minimum--;
+ //                   }
+
+ //                   int @switch = 0;
+ //                   for (int j = 0; j<Children[i].IndentationsLength; j++)
+ //                   {
+ //                       if (@switch == 0)
+ //                       {
+ //                           Console.Write(' ');
+ //                           @switch++;
+ //                       }
+ //                       else
+ //                       {
+ //                           if (!Children[i].ThisDisk)
+ //                           {
+ //                               Console.Write((char)0x2502);
+ //                           }
+ //                           @switch--;
+ //                       }
+ //                   }
+
+ //                   if (i<Children.Count - 1)
+ //                   {
+ //                       if (i<Children.Count - 1 && Children[i] is Folder && Children[i + 1] is _File)
+ //                       {
+ //                           Console.Write((char)0x2514);
+ //                       }
+ //                       else if (Children[i] is Folder)
+ //                       {
+ //                           Console.Write((char)0x251C);
+ //                       }
+ //                       else
+ //                       {
+ //                           Console.Write((char)0x2502);
+ //                           Console.Write("  ");
+ //                       }
+ //                   }
+ //                   else
+ //                   {
+ //                       if (Children[i] is Folder)
+ //                       {
+ //                           Console.Write((char)0x2514);
+ //                       }
+ //                       else
+ //                       {
+ //                           Console.Write((char)0x2502);
+ //                           Console.Write("  ");
+ //                       }
+ //                   }
+ //                   Children[i].ShowName();
+ //               }
+ //               Children[i].Show();
+ //           }

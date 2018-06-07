@@ -6,7 +6,7 @@ namespace FileSystemViewer
     {
         static private int consoleWindowHeight = Console.WindowHeight;
         static private bool initialize = true;
-        static private int minimumCoordinate = 0;
+        static private int minimumCoordinate = 1;
         static private int windowHeight = 0;
 
         static public int MaximumHeight
@@ -25,7 +25,7 @@ namespace FileSystemViewer
         {
             if (initialize)
             {
-                WindowSize.MaximumHeight = Console.WindowHeight;
+                WindowSize.MaximumHeight = Console.WindowHeight-1;
                 initialize = false;
             }
         }

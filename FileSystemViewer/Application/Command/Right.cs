@@ -42,6 +42,7 @@ namespace FileSystemViewer.Application.Command
         {
             ShowComposite.show(myComputer);
             ToWork toWork = new ToWork(true);
+         //   folders[current.Index].Current = true;
 
             while (toWork.Working)
             {

@@ -26,9 +26,14 @@ namespace FileSystemViewer.Application.Composite
                 Console.BackgroundColor = ConsoleColor.White;
             }
 
+            // Console.Write(Name);
+            //  ShowLength();
+            //  Console.WriteLine();
+            //  Console.ResetColor();
+
             Console.Write(Name);
-            ShowLength();
-            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(Coordinate);
             Console.ResetColor();
         }
 
