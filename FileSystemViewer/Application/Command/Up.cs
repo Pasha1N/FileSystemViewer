@@ -9,12 +9,13 @@ namespace FileSystemViewer.Application.Command
         private Current current;
         private IList<_Directory> folders;
         private IList<string> paths;
-
-        public Up(IList<string> paths, IList<_Directory> folders, Current current)
+        private Folder myComputer;
+        public Up(IList<string> paths, IList<_Directory> folders, Current current, Folder myComputer)
         {
             this.paths = paths;
             this.current = current;
             this.folders = folders;
+            this.myComputer = myComputer;
         }
 
         public void Executive(ConsoleKeyInfo key)

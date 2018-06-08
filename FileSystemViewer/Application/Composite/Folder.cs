@@ -30,6 +30,25 @@ namespace FileSystemViewer.Application.Composite
             }
         }
 
+        public void SetCoordinatesCurrentDirectory()
+        {
+            int currentCoordinates = 0;
+
+            foreach (_Directory child in Children)
+            {
+                if (child.Current)
+                {
+                    currentCoordinates = child.Coordinate;
+                }
+            }
+
+            foreach (_Directory child in Children)
+            {
+                child.CoordinateCurrentDyrectory = currentCoordinates;
+            }
+            SetCoordinatesCurrentDirectory();
+        }
+
         public override void ShowName()
         {
             Console.ForegroundColor = ThisDisk ? ConsoleColor.Green : Console.ForegroundColor = ConsoleColor.Yellow;
@@ -72,6 +91,7 @@ namespace FileSystemViewer.Application.Composite
                         WindowSize.Minimum--;
                     }
                 }
+
                 if (Children[i].Coordinate >= WindowSize.Minimum && Children[i].Coordinate < WindowSize.MaximumHeight)
                 {
                   

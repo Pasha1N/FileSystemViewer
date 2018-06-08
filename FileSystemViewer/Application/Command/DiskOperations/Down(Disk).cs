@@ -9,12 +9,14 @@ namespace FileSystemViewer.Application.Command.DiskOperations
         private Current current;
         private IList<_Directory> folders;
         private IList<string> paths;
+        private Folder myComputer;
 
-        public DownDisk(IList<string> paths, IList<_Directory> folders, Current current)
+        public DownDisk(IList<string> paths, IList<_Directory> folders, Current current, Folder myComputer)
         {
             this.paths = paths;
             this.current = current;
             this.folders = folders;
+            this.myComputer = myComputer;
         }
 
         public void Executive(ConsoleKeyInfo key)
@@ -42,6 +44,8 @@ namespace FileSystemViewer.Application.Command.DiskOperations
                         folder.Current = true;
                     }
                 }
+
+               // myComputer.SetCoordinatesCurrentDirectory();
             }
         }
     }

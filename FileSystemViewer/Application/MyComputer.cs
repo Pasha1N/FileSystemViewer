@@ -53,8 +53,8 @@ namespace FileSystemViewer.Application
 
             while (true)
             {
-                DownDisk downArrow = new DownDisk(paths, folders, current);
-                Up upArrow = new Up(paths, folders, current);
+                DownDisk downArrow = new DownDisk(paths, folders, current,myComputer);
+                Up upArrow = new Up(paths, folders, current,myComputer);
                 Right rightArrow = new Right(folders[current.Index] as Folder, indentationsLength, myComputer);
 
                 commands.Add(rightArrow);

@@ -49,8 +49,8 @@ namespace FileSystemViewer.Application.Command
                 ConsoleKeyInfo key;
                 if (folders.Count > 0)
                 {
-                    Down downArrow = new Down(fileSystemEntriesPaths, folders, current);
-                    Up upArrow = new Up(fileSystemEntriesPaths, folders, current);
+                    Down downArrow = new Down(fileSystemEntriesPaths, folders, current,myComputer);
+                    Up upArrow = new Up(fileSystemEntriesPaths, folders, current,myComputer);
 
                     try
                     {
@@ -60,7 +60,7 @@ namespace FileSystemViewer.Application.Command
                             commands.Add(rightArrow);
                         }
                     }
-                    catch (UnauthorizedAccessException exception)
+                    catch (UnauthorizedAccessException)
                     {
                     }
 
@@ -127,10 +127,8 @@ namespace FileSystemViewer.Application.Command
 
             folders[current.Index].Current = true;
 
-            foreach (_Directory folder in folders)
-            {
-                folder.CoordinateCurrentDyrectory = mainFolder.CoordinateCurrentDyrectory;
-            }
+            myComputer.SetCoordinatesCurrentDirectory();
+        
         }
     }
 }

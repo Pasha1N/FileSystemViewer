@@ -66,7 +66,7 @@
             set { path = value; }
         }
 
-        public abstract void Coordinator();
+        public abstract void Coordinator();    
 
         abstract public void Show();
 

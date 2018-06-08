@@ -9,12 +9,14 @@ namespace FileSystemViewer.Application.Command
         private Current current;
         private IList<_Directory> folders;
         private IList<string> paths;
+        private Folder myComputer;
 
-        public Down(IList<string> paths, IList<_Directory> folders, Current current)
+        public Down(IList<string> paths, IList<_Directory> folders, Current current, Folder myComputer)
         {
             this.paths = paths;
             this.current = current;
             this.folders = folders;
+            this.myComputer = myComputer;
         }
 
         public void Executive(ConsoleKeyInfo key)
@@ -35,18 +37,7 @@ namespace FileSystemViewer.Application.Command
                     current.Index++;
                 }
 
-                foreach (_Directory folder in folders)
-                {
-                    if (folder.Way == paths[current.Index])
-                    {
-                        folder.Current = true;
-
-                        foreach (_Directory folder1 in folders)
-                        {
-                            folder1.CoordinateCurrentDyrectory = folder.Coordinate;
-                        }
-                    }
-                }
+                myComputer.SetCoordinatesCurrentDirectory();
             }
         }
     }
