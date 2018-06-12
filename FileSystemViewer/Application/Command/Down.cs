@@ -37,7 +37,7 @@ namespace FileSystemViewer.Application.Command
                     current.Index++;
                 }
 
-                myComputer.SetCoordinatesCurrentDirectory();
+               // myComputer.SetCoordinatesCurrentDirectory();
             }
         }
     }

@@ -66,7 +66,9 @@
             set { path = value; }
         }
 
-        public abstract void Coordinator();    
+        public abstract void Coordinator();
+
+        public abstract void SetCoordinatesCurrentDirectory();
 
         abstract public void Show();
 

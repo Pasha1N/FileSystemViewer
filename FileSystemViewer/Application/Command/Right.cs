@@ -127,7 +127,7 @@ namespace FileSystemViewer.Application.Command
 
             folders[current.Index].Current = true;
 
-            myComputer.SetCoordinatesCurrentDirectory();
+           // myComputer.SetCoordinatesCurrentDirectory();
         
         }
     }

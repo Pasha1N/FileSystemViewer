@@ -41,6 +41,10 @@ namespace FileSystemViewer.Application.Composite
         {
         }
 
+        override public void SetCoordinatesCurrentDirectory()
+        {
+        }
+
         public void ShowLength()
         {
             FileInfo file = new FileInfo(Way);

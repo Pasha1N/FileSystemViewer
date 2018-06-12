@@ -30,23 +30,25 @@ namespace FileSystemViewer.Application.Composite
             }
         }
 
-        public void SetCoordinatesCurrentDirectory()
+        override public void SetCoordinatesCurrentDirectory()
         {
-            int currentCoordinates = 0;
+            //int currentCoordinates = 1;
 
             foreach (_Directory child in Children)
             {
                 if (child.Current)
                 {
-                    currentCoordinates = child.Coordinate;
+                    CoordinateCurrentDyrectory = child.Coordinate;
+
                 }
             }
 
             foreach (_Directory child in Children)
             {
-                child.CoordinateCurrentDyrectory = currentCoordinates;
+                //child.CoordinateCurrentDyrectory = currentCoordinates;
+                child.CoordinateCurrentDyrectory = CoordinateCurrentDyrectory;
+                child.SetCoordinatesCurrentDirectory();
             }
-            SetCoordinatesCurrentDirectory();
         }
 
         public override void ShowName()
@@ -83,7 +85,6 @@ namespace FileSystemViewer.Application.Composite
                         WindowSize.MaximumHeight++;
                         WindowSize.Minimum++;
                     }
-
 
                     if (Children[i].CoordinateCurrentDyrectory <= WindowSize.Minimum)
                     {
